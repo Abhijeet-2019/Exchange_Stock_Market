@@ -1,0 +1,10 @@
+server:
+  port: 8888
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Abhijeet-2019/Stock_info_Cloud_Config_Server
+          clone-on-start: true

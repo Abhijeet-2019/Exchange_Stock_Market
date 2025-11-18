@@ -1,0 +1,21 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: stock-repo-service
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    consumer.group-id: "stockDetail-group"
+    template:
+      stockDetails-topic: "stock-details-topic"
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: true
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://localhost:8761/eureka"
+    register-with-eureka: true
+    fetch-registry: true
