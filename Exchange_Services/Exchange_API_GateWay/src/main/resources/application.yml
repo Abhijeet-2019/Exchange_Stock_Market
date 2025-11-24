@@ -34,6 +34,8 @@
           url: /user-service/v3/api-docs
         - name: Exchange Stock Repository Service
           url: /stock-repo-service/v3/api-docs
+        - name: User Details Service
+          url: /user-service/v3/api-docs
 
     group-configs:
       - group: full-api

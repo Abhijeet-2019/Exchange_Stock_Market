@@ -1,0 +1,31 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: user-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/User_Service
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        globally_quoted_identifiers_skip_column_definitions: 'true'
+        globally_quoted_identifiers: 'true'
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://localhost:8761/eureka"
+    register-with-eureka: true
+    fetch-registry: true
+

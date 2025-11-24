@@ -15,6 +15,7 @@
         <module>Exchange_Config_Service</module>
         <module>Exchange_Stock_Repository</module>
         <module>Exchange_Eureka_Service</module>
+        <module>Exchange_User_Service</module>
     </modules>
 
     <properties>
