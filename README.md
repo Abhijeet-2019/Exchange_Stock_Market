@@ -1,4 +1,4 @@
-													# Exchange_Stock_Market
+								# Exchange_Stock_Market
 Created this project to demostrate the OAuth2 code base with Key Cloak OAuth server.
 	BackEnd part:
 User Interface:
@@ -9,13 +9,14 @@ User Interface:
 			Stock details	
 Services :
 	
-	API GateWay.
+	Exchange API GateWay.
 			Main API Gateway for all back end application.
 			A Normal Spring Boot Application.
-				
+	
+	Exchange Config Server.
 	User_Service.
 	Portfolio_Service.
-	Order_Service.
+	Exchange_Stock_Repository
 	Trade_Service
 	Notification_Service:
 
