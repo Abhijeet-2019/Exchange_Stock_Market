@@ -21,6 +21,6 @@ public class PublicController {
             (@RequestParam(name = "testAPI", required = true)
              @Parameter(example = "Test") String userNane) {
         log.info("This is a Test API for Public, {}", userNane);
-        return new ResponseEntity<String>("Hi i am working ", null, 200);
+        return new ResponseEntity<>("Hi i am working ", null, 200);
     }
 }

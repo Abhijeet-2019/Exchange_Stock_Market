@@ -1,10 +1,12 @@
 package com.exchange.stock.market.repo.Consumer;
 
+import com.exchange.stock.market.repo.config.Elastic.ElasticDao;
 import com.exchange.stock.market.repo.domain.StockDetails;
 import com.exchange.stock.market.repo.service.StockElasticService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -23,9 +25,8 @@ public class StockDetailsListener {
     @Value(value = "${spring.kafka.consumer.group-id}")
     private String groupId;
 
-
-    private final StockElasticService stockElasticService;
-
+    @Autowired
+    private ElasticDao elasticDao;
 
     @KafkaListener(topics = "${spring.kafka.template.stockDetails-topic}", groupId = "stockDetail-group") public void kafkaListener (
             ConsumerRecord<String, Object> record) {
@@ -44,8 +45,9 @@ public class StockDetailsListener {
             stockDetails.setTotalTradedQty(Double.parseDouble(valueMap.get("totalTradedQty").toString()));
             stockDetails.setLastTradedDate(valueMap.get("lastTradedDate").toString());
             stockDetails.setIsin(valueMap.get("isin").toString());
-            log.info("Stock Name: " + stockDetails.getName());
-            stockElasticService.saveSingleStockRecord(stockDetails);
+            log.info("Stock Name: {}",stockDetails.getName());
+//
+            elasticDao.saveSingleStockRecord(stockDetails);
             log.info("Reco " + stockDetails.getName());
         }catch (Exception e){
             log.error("Error processing the kafka message", e);

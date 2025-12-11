@@ -15,9 +15,10 @@ import org.springframework.security.web.SecurityFilterChain;
 /**
  * This class is an example of Spring Basic security authentication.
  * Here we use internal database tables to authenticate users.
+ * This class was added for Testing purpose only.
  */
-@EnableWebSecurity
-@Configuration
+//@EnableWebSecurity
+//@Configuration
 @AllArgsConstructor
 public class BasicAuthenticationSecurityConfig {
 
@@ -39,7 +40,7 @@ public class BasicAuthenticationSecurityConfig {
                                         "/webjars/**",
                                         "/public/**"
                                 ).permitAll().
-                                anyRequest().authenticated()                )
+                                anyRequest().authenticated())
                     .httpBasic(Customizer.withDefaults())
                 .build();
     }

@@ -1,21 +1,19 @@
 package com.exchange.stock.market.repo.service;
 
-
 import com.exchange.stock.market.repo.domain.StockDetails;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import com.exchange.stock.market.repo.domain.StockDocument;
+import com.exchange.stock.market.repo.domain.LatestStockDetailsResponse;
+import java.util.List;
 
-@Service
-@Slf4j
-public class StockInfoService {
+public interface StockInfoService {
+
+    List<StockDetails>  fetchStockHistoricalDataByName(String name) throws Exception;
+
+    List<StockDetails> populateMarketData() throws Exception;
+
+    StockDetails fetchLatestStockPrice(String stockName) throws Exception;
+
+    LatestStockDetailsResponse fetchMarketWatchData(int size , String fetchStockAfterName) throws Exception;
 
 
-    public StockDetails fetchStockInformation(String stockName) {
-        log.info("Fetching the details related to Stock Info", stockName);
-        StockDetails stockDetails = new StockDetails();
-        stockDetails.setName("TCS");
-        stockDetails.setTckrSymb("TCS");
-        stockDetails.setMarket("VSE");
-        return stockDetails;
-    }
 }

@@ -11,6 +11,8 @@
           locator:
             enabled: true
             lower-case-service-id: true     # important for swagger & routing
+      default-filters:
+        - TokenRelay
 
   eureka:
     client:
@@ -36,6 +38,8 @@
           url: /stock-repo-service/v3/api-docs
         - name: User Details Service
           url: /user-service/v3/api-docs
+        - name: Portfolio Service
+          url: /portfolio-service/v3/api-docs
 
     group-configs:
       - group: full-api
@@ -44,6 +48,7 @@
           - /stock-service/**
           - /user-service/**
           - /stock-repo-service/**
+          - /portfolio-service/**
 
 
   logging:

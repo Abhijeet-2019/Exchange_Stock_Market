@@ -11,11 +11,12 @@
     <url>http://maven.apache.org</url>
     <modules>
         <module>Exchange_API_GateWay</module>
-        <module>Exchange_Stock_Service</module>
+        <module>Exchange_Stock_Market</module>
         <module>Exchange_Config_Service</module>
         <module>Exchange_Stock_Repository</module>
         <module>Exchange_Eureka_Service</module>
         <module>Exchange_User_Service</module>
+        <module>Exchange_Portfolio_Service</module>
     </modules>
 
     <properties>
