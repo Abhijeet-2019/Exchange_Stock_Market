@@ -16,9 +16,13 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class StockRepoAppStartUp {
 
+    /**
+     * Main class for the application...
+     * @param args
+     */
     public static void main(String[] args) {
         log.info("Starting Stock Repository Application...");
         SpringApplication.run(StockRepoAppStartUp.class, args);
-        log.info("Stock Repository Application started successfully.");
+        log.info("Stock Repository Application started successfully...");
     }
 }

@@ -1,38 +1,32 @@
 server:
   port: 8086
+  forward-headers-strategy: framework
 
 spring:
   application:
     name: portfolio-service
+
   security:
     oauth2:
-      client:
-        registration:
-          mywebclient:
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            scope: openid, profile, roles
-            client-secret: TMqLUzsWNp20d6ODqKpWwsnGaTtwUOYH
-            client-id: stock_exchange_security
-            authorization-grant-type: authorization_code
-        provider:
-          mywebclient:
-            token-uri: http://localhost:8180/realms/Stock_Exchange_API/protocol/openid-connect/token
-            user-info-uri: http://localhost:8180/realms/Stock_Exchange_API/protocol/openid-connect/userinfo
-            jwk-set-uri: http://localhost:8180/realms/Stock_Exchange_API/protocol/openid-connect/certs
-            authorization-uri: http://localhost:8180/realms/Stock_Exchange_API/protocol/openid-connect/auth
-            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/Stock_Exchange_API
 
 springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+
   swagger-ui:
-    oauth2-redirect-url: http://localhost:8086/swagger-ui/oauth2-redirect.html
-    oauth:
-      client-id: stock_exchange_security
-      client-secret: TMqLUzsWNp20d6ODqKpWwsnGaTtwUOYH
-      scopes: openid, profile, roles
+    enabled: false   # 🚫 Disable UI in microservice
 
 eureka:
   client:
     service-url:
-      defaultZone: "http://localhost:8761/eureka"
+        defaultZone: "http://localhost:8761/eureka"
     register-with-eureka: true
     fetch-registry: true
+
+logging:
+  level:
+    org.springframework.security: INFO

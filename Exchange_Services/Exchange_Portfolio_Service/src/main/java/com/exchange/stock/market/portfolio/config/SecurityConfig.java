@@ -19,13 +19,12 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
-                                "/swagger-resources/**",
+                                 "/swagger-resources/**",
                                 "/configuration/**",
                                 "/webjars/**"
                         ).permitAll()
                         .anyRequest().authenticated())
-                .oauth2Login(Customizer.withDefaults())
-                .oauth2Client(Customizer.withDefaults()); // because it's an OAuth client
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt()); // because it's an OAuth client
         return http.build();
     }
 }
