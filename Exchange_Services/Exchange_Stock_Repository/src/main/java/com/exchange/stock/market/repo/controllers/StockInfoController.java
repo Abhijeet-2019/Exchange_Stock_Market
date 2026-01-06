@@ -3,7 +3,7 @@ package com.exchange.stock.market.repo.controllers;
 
 import com.exchange.stock.market.repo.domain.LatestStockDetailsResponse;
 import com.exchange.stock.market.repo.domain.StockDetails;
-import com.exchange.stock.market.repo.domain.StockDocument;
+
 import com.exchange.stock.market.repo.service.StockInfoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("/fetchStockInfo")
+@RequestMapping("/stockDetails")
 @AllArgsConstructor
 @Tag(name = "Stock Information")
 @CrossOrigin(origins = "http://localhost:8080") // Allow requests from port 8080
@@ -32,7 +32,6 @@ public class StockInfoController {
      */
     @GetMapping("/stockName")
     @Operation(summary = "Fetch all Stock Details Information")
-
     public ResponseEntity<List<StockDetails>> fetchAllHistoricalData(@RequestParam(name = "stockName", required = true) @Parameter(example = "TCS") String stockName) {
         List<StockDetails> stockDetails = null;
         try {
@@ -63,7 +62,7 @@ public class StockInfoController {
     }
 
     /**
-     *
+     * This method is used when we need to fetch the latest market data for 200 Stocks.
      * @param size
      * @param searchAfter
      * @return
@@ -81,7 +80,6 @@ public class StockInfoController {
         }
         return new ResponseEntity<LatestStockDetailsResponse>(response, null,200);
     }
-
 }
 
 

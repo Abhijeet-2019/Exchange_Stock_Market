@@ -200,11 +200,6 @@ public class ElasticDaoImpl implements ElasticDao {
 
             if (innerHits != null && !innerHits.isEmpty()) {
                 StockDetails latest = innerHits.getSearchHit(0).getContent();
-                System.out.println(latest.getTckrSymb());
-                System.out.println(latest.getName());
-                System.out.println(latest.getIsin());
-                System.out.println(latest.getHigh());
-                System.out.println(latest.getName());
                 results.add(latest);
             }
         }

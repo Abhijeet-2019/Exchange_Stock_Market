@@ -24,4 +24,4 @@ Services :
 
 
 Main Swagger URl:
-http://localhost:8080/webjars/swagger-ui/index.html
+http://localhost:8080/swagger-ui.html
