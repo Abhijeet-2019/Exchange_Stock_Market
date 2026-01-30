@@ -13,6 +13,4 @@ public class LatestStockDetailsResponse {
  private String nextSearchStockName;
  private int pageSize;
  private boolean hasNextElement;
-
-
 }

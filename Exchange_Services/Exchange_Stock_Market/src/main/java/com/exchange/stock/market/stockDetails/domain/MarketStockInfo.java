@@ -19,4 +19,8 @@ public class MarketStockInfo {
     private String lastTradedDate;
     private double totalTradedQty;
     private String bizDate;
+    private double yearWeekHigh;
+    private double yearWeekLow;
+    private String industry;
+
 }

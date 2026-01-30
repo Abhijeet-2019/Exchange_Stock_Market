@@ -10,10 +10,12 @@ spring:
       forwarded:
         enabled: true
       globalcors:
+        add-to-simple-url-handler-mapping: true
         cors-configurations:
           '[/**]':
             allowed-origins:
               - "http://localhost:8080"
+              - "http://localhost:3000"
             allowed-methods:
               - GET
               - POST

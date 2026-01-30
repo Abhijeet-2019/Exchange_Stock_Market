@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/stockDetails")
 @AllArgsConstructor
 @Tag(name = "Stock Information")
-@CrossOrigin(origins = "http://localhost:8080") // Allow requests from port 8080
+//@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:3000"})// Allow requests from port 8080
 public class StockInfoController {
 
     private final StockInfoService stockInfoService;
@@ -81,6 +81,3 @@ public class StockInfoController {
         return new ResponseEntity<LatestStockDetailsResponse>(response, null,200);
     }
 }
-
-
-
