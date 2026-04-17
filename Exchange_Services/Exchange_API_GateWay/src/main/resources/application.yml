@@ -1,10 +1,16 @@
+app:
+  spring:
+    security:
+      enabled : false
+
 server:
   port: 8080
 
 spring:
   application:
     name: api-gateway
-
+  reactor:
+    context-propagation: auto
   cloud:
     gateway:
       forwarded:
@@ -40,7 +46,7 @@ spring:
         jwt:
           issuer-uri: http://localhost:8180/realms/Stock_Exchange_API
 
-      #OAuth2 Client (Swagger Login)
+      #OAuth2 Client (Swagger Login) // This has details related to the client Only needed
       client:
         registration:
           mywebclient:
@@ -69,6 +75,8 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
     urls-primary-name: Complete Exchange API's
+    doc-expansion: none
+    enabled: true
 
     oauth:
       client-id: stock_exchange_security
@@ -85,8 +93,6 @@ springdoc:
         url: /user-service/v3/api-docs
       - name: Exchange Stock Repository Service
         url: /stock-repo-service/v3/api-docs
-      - name: User Details Service
-        url: /user-service/v3/api-docs
       - name: Portfolio Service
         url: /portfolio-service/v3/api-docs
 
@@ -100,7 +106,26 @@ springdoc:
 #        - /portfolio-service/**
 
 
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: INFO
+#    org.springframework.web: INFO
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  observations:
+    enable:
+      spring.cloud.gateway: true
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
 logging:
   level:
-    org.springframework.cloud.gateway: INFO
-    org.springframework.web: INFO
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.server: DEBUG
+    io.micrometer.tracing: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name:},traceId=%X{traceId:-},spanId=%X{spanId:-}]"
+

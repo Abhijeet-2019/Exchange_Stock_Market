@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository  extends JpaRepository<Users,Long> {
+public interface    UserRepository  extends JpaRepository<Users,Long> {
 
     List <Users>findByEmailAndPassword(String email, String password);
     Optional<Users> findByEmail(String email);

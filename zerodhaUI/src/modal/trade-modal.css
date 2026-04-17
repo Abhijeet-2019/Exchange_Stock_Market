@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+* {
+  font-family: 'Inter', sans-serif;
+  
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background: #8a8a8e;
+  width: 450px;
+  border-radius: 6px;
+  padding: 12px;
+  font-weight: 100;
+  width: 420px;
+  border-radius: 8px;
+  padding: 14px;
+  border: 2px solid rgb(95, 35, 35); /* default */    
+   color: rgb(21, 21, 21);
+
+}
+.buy-border {
+  border-color: #2e7d32;
+}
+
+.sell-border {
+  border-color: #c62828;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+   background-color: #3f433f;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  background-color: #3f433f;
+
+}
+
+.buy {
+  background: #2e7d32;
+  color: rgb(255, 255, 255);
+}
+
+.sell {
+  background: #c62828;
+  color: rgb(30, 25, 25);
+}
+
+.row {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.toggle {
+  display: flex;
+  gap: 6px;
+}

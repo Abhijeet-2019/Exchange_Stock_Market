@@ -4,8 +4,10 @@ import com.exchange.stock.market.repo.config.Elastic.ElasticDao;
 import com.exchange.stock.market.repo.domain.LatestStockDetailsResponse;
 import com.exchange.stock.market.repo.domain.StockDetails;
 import com.exchange.stock.market.repo.domain.StockDocument;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class StockInfoServiceImpl implements StockInfoService {
     }
 
     @Override
+    @Cacheable(value = "stockCache", key = "#stockName")
     public StockDetails fetchLatestStockPrice(String stockName) throws Exception {
            return elasticDao.fetchLatestStockPrice(stockName);
     }

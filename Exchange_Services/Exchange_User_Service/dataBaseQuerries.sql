@@ -34,12 +34,12 @@ create table users_details
     constraint user_id_fk1 foreign key(user_id) references users(user_id)
    );
 
-CREATE TABLE user_stockWatchList(
-  watchList_id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE user_stock_watchlist(
+  watch_list_id  INT NOT NULL AUTO_INCREMENT,
   user_id INT NOT NULL,
-  stockName VARCHAR(50) NOT NULL,
+  stock_Name VARCHAR(50) NOT NULL,
   transaction_date DATE,
-  CONSTRAINT watchList_id_pk PRIMARY KEY (watchList_id),
+  CONSTRAINT watchList_id_pk PRIMARY KEY (watch_list_id),
   CONSTRAINT user_id_fk1 FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 

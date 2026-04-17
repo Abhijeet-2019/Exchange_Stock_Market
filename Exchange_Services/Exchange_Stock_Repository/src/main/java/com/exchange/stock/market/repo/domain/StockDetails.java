@@ -1,8 +1,9 @@
 package com.exchange.stock.market.repo.domain;
 
-import lombok.*;
 
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -22,5 +23,6 @@ public class StockDetails {
     private double yearWeekHigh;
     private double yearWeekLow;
     private String industry;
-
+    private boolean addedToWatchList;
 }
+

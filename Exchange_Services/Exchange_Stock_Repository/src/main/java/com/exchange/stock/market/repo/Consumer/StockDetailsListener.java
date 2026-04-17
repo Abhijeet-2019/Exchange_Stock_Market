@@ -2,17 +2,17 @@ package com.exchange.stock.market.repo.Consumer;
 
 import com.exchange.stock.market.repo.config.Elastic.ElasticDao;
 import com.exchange.stock.market.repo.domain.StockDetails;
-import com.exchange.stock.market.repo.service.StockElasticService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-
-import java.util.LinkedHashMap;
 
 /**
  * The StockDetailsListener class is a Spring component that listens for stock details updates.
@@ -21,16 +21,18 @@ import java.util.LinkedHashMap;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@ConditionalOnProperty(
+        name = "app.kafka.enabled",
+        havingValue = "true"
+)
 public class StockDetailsListener {
 
     @Value(value = "${spring.kafka.consumer.group-id}")
     private String groupId;
 
-    @Autowired
-    private ElasticDao elasticDao;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final  ElasticDao elasticDao;
+    private final  ObjectMapper objectMapper;
+    private final CacheManager cacheManager;
 
     /**
      * Kafa Listener method for Persistance of messages.
@@ -47,6 +49,8 @@ public class StockDetailsListener {
                         StockDetails.class);
                 elasticDao.saveSingleStockRecord(stockDetails);
                 log.info("Saved stock: {}", stockDetails.getName());
+                // Clear the cache from the Cache Manager
+                cacheManager.getCache("stockCache").clear();
             }catch (Exception ex){
                 log.error("Unable to read and persist Stock details Messages");
                 ex.printStackTrace();

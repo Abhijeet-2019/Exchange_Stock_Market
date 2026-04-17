@@ -1,5 +1,6 @@
 server:
-  port: 8084
+  port: 8085
+  forward-headers-strategy: framework
 
 spring:
   application:
@@ -14,13 +15,14 @@ spring:
     url: jdbc:mysql://localhost:3306/User_Service
     password: root
   jpa:
+    show-sql: true
     properties:
       hibernate:
         globally_quoted_identifiers_skip_column_definitions: 'true'
         globally_quoted_identifiers: 'true'
         dialect: org.hibernate.dialect.MySQLDialect
     hibernate:
-      ddl-auto: update
+      format_sql: true
   security:
     oauth2:
       resourceserver:
@@ -33,3 +35,47 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
 
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+
+  swagger-ui:
+    enabled: false
+    doc-expansion: none
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web:
+#          reactive:
+#            function:
+#              client: DEBUG
+#    reactor:
+#      netty:
+#        http:
+#          client: DEBUG
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      serviceBBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 3          # Check the last 10 calls
+        failureRateThreshold: 2        # Open if 5 or more (50%) fail
+        waitDurationInOpenState: 15s   # Wait 10s before trying again
+        permittedNumberOfCallsInHalfOpenState: 1 #
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0   # start with 100%, reduce in prod
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+#      endpoint: http://zipkin:9411/api/v2/spans
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},traceId=%X{traceId},spanId=%X{spanId}]"

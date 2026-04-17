@@ -1,6 +1,9 @@
 server:
   port: 8082
   forward-headers-strategy: framework
+app:
+  kafka:
+    enabled: true
 
 spring:
   application:
@@ -35,3 +38,17 @@ springdoc:
 
   swagger-ui:
     enabled: false
+    doc-expansion: none
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0   # start with 100%, reduce in prod
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+#      endpoint: http://zipkin:9411/api/v2/spans
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},traceId=%X{traceId},spanId=%X{spanId}]"

@@ -1,0 +1,161 @@
+/* Positive price change */
+.text-green {
+  color: #1b8f3c;
+  font-weight: 600;
+}
+
+/* Negative price change */
+.text-red {
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+/* Optional: improve row hover */
+.ag-theme-quartz .ag-row-hover {
+  background-color: #f5f7fa !important;
+}
+
+/* Optional: center header text */
+.ag-theme-quartz .ag-header-cell-label {
+  justify-content: center;
+}
+
+/* Optional: compact row height */
+.ag-theme-quartz {
+  --ag-row-height: 36px;
+}
+/* ALL cells bold */
+.cell-bold {
+  font-weight: 600;
+}
+
+/* Name column */
+.text-blue {
+  color: #1976d2;
+}
+
+/* Change column colors */
+.text-green {
+  color: #1b8f3c;
+}
+
+.text-red {
+  color: #d32f2f;
+}
+
+
+.btn-buy {
+  background-color: #1b8f3c;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-sell {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-buy:hover {
+  background-color: #157a31;
+}
+
+.btn-sell:hover {
+  background-color: #b71c1c;
+}
+
+
+/* Action column container */
+.action-cell {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Base button style */
+/* .btn-action {
+  height: 22px;
+  width: 50px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: rgb(169, 21, 21);
+  border: 1px solid #1976d2; /* Blue border */
+  /* color: #1976d2; */
+
+
+/* Buy button */
+.btn-buy:hover {
+  background-color: #e3f2fd;
+}
+
+/* Sell button */
+.btn-sell:hover {
+  background-color: #fdecea;
+  color: #d32f2f;
+  border-color: #d32f2f;
+}
+/* Action column container */
+.action-cell {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Base button style */
+ .btn-action {
+  height: 22px;
+  width: 50px;
+  padding: 0;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid #1976d2; /* Blue border */
+} 
+
+/* BUY button */
+.btn-buy {
+  color: #14e509;
+  padding-bottom: 2;
+}
+
+.btn-buy:hover {
+  background-color: #e6f4ea;
+}
+
+/* SELL button */
+.btn-sell {
+  color: #d32f2f;
+}
+
+.btn-sell:hover {
+  background-color: #fdecea;
+}
+
+
+/* Header background */
+.ag-theme-quartz .ag-header {
+  background-color: #bfc2c6;   /* Dark blue */
+}
+
+/* Header text */
+.ag-theme-quartz .ag-header-cell-label {
+  color: rgb(209, 20, 20);
+  font-weight: 780;
+}
+
+/* Header bottom border */
+.ag-theme-quartz .ag-header-row {
+  border-bottom: 2px solid #c7cdd8;
+}

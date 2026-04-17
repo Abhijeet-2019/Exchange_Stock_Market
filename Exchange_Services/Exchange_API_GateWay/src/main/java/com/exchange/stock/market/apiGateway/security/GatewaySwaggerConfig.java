@@ -3,11 +3,16 @@ package com.exchange.stock.market.apiGateway.security;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.security.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springdoc.core.customizers.OpenApiCustomizer;
 
 @Configuration
+@ConditionalOnProperty(
+        name = "app.spring.security.enabled",
+        havingValue = "true"
+)
 public class GatewaySwaggerConfig {
 
     @Bean

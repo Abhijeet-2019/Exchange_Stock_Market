@@ -47,11 +47,19 @@ public class Users {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private UserDetails userDetails;
 
+    @OneToMany(
+            mappedBy = "users",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+        @JsonIgnore
+        private Set<UserStockWatchList> userStockWatchList;
 
     @OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
     @JsonIgnore
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-        private Set<Authorities> authorities;
+    private Set<Authorities> authorities;
 
     public void addAuthorities(Set<Authorities> authorities)
     {
@@ -62,5 +70,10 @@ public class Users {
     public void addUserDetails(UserDetails userDetails){
         userDetails.setUsers(this);
         this.setUserDetails(userDetails);
+    }
+
+    public void addUserStockWatchList(Set<UserStockWatchList> userStockWatchList){
+        userStockWatchList.forEach(userStockWatchListparam -> userStockWatchListparam.setUsers(this));
+        this.setUserStockWatchList(userStockWatchList);
     }
 }

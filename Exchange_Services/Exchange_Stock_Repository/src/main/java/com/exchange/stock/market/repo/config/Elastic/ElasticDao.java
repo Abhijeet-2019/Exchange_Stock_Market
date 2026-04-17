@@ -4,6 +4,7 @@ import com.exchange.stock.market.repo.domain.LatestStockDetailsResponse;
 import com.exchange.stock.market.repo.domain.StockDetails;
 import com.exchange.stock.market.repo.domain.StockDocument;
 
+
 import java.util.List;
 
 public interface ElasticDao {

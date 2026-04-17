@@ -5,13 +5,14 @@ import co.elastic.clients.elasticsearch._types.SortOrder;
 
 
 import com.exchange.stock.market.repo.domain.LatestStockDetailsResponse;
+import com.exchange.stock.market.repo.domain.StockDetails;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
 
 
-import com.exchange.stock.market.repo.domain.StockDetails;
 import com.exchange.stock.market.repo.domain.StockDocument;
 import com.exchange.stock.market.repo.service.StockElasticRepository;
 import jakarta.annotation.PostConstruct;
@@ -92,7 +93,7 @@ public class ElasticDaoImpl implements ElasticDao {
         SearchHits<StockDocument> hits = elasticOps.search(query, StockDocument.class);
 
         List<StockDocument> list = hits.getSearchHits().stream().map(SearchHit::getContent).toList();
-        System.out.println("The size of List" + list.size());
+        log.info("The size of List" + list.size());
         return list;
     }
 
@@ -141,7 +142,7 @@ public class ElasticDaoImpl implements ElasticDao {
                         (SearchHits<Object>) hit.getInnerHits().get("stock_details");
                 if (innerHits != null && !innerHits.isEmpty()) {
                     stockDetails = (StockDetails) innerHits.getSearchHit(0).getContent();
-                    log.info("The Latest Stock details are {}", stockDetails.getHigh());
+                    log.info(" Fetching The Latest Stock details for {}", stockDetails.getName());
                 }
             }
         } catch (ElasticsearchException exception) {

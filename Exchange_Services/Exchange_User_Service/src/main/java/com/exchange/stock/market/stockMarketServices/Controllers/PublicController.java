@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class PublicController {
 
     @GetMapping("/test")
-    @Operation(summary = "This is a test APL    ")
+    @Operation(summary = "This is a test API ")
     @Tag(name = "Test API")
     public ResponseEntity testPublicAPI
             (@RequestParam(name = "testAPI", required = true)

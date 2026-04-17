@@ -38,7 +38,7 @@ public class MarketUpdateDetailsImpl implements MarketUpdateDetails {
 
     private final Path BASE_DIR = Paths.get("downloadedCSV");
     private final Path ZIP_PATH = BASE_DIR.resolve("bhavcopy.zip");
-    private final Path CSV_PATH = BASE_DIR.resolve("bhavcopy.csv");
+    private Path CSV_PATH;
     private final StockPublisher stockPublisher;
 
 
@@ -51,6 +51,7 @@ public class MarketUpdateDetailsImpl implements MarketUpdateDetails {
     public void populateStockDetailsFromCSV(LocalDate date) {
         try {
             String formattedDate = date.format(java.time.format.DateTimeFormatter.ofPattern("ddMMyy"));
+            CSV_PATH = BASE_DIR.resolve("bhavcopy.csv" + formattedDate);
             log.info(" The input date for fetching  the stock details {} ", formattedDate);
             if (!Files.exists(BASE_DIR)) {
                 Files.createDirectories(BASE_DIR);
@@ -59,9 +60,9 @@ public class MarketUpdateDetailsImpl implements MarketUpdateDetails {
                     "https://www.bseindia.com/bsedata/newbhavcopy/bhavcopy" + formattedDate + "_CSV.ZIP";
             downloadZip(DOWNLOAD_URL1, ZIP_PATH);
             unzip(ZIP_PATH, CSV_PATH);
-             parseCSVandPopulateStocks(CSV_PATH, date);
+            parseCSVandPopulateStocks(CSV_PATH, date);
         } catch (Exception ex) {
-            log.error("Unable to parse the Provided URL for the date --- {}", date);
+            log.error("Unable to parse the Provided URL for the date {} - {}", date, ex);
         }
     }
 
@@ -119,6 +120,14 @@ public class MarketUpdateDetailsImpl implements MarketUpdateDetails {
         try (ZipInputStream zis = new ZipInputStream(new FileInputStream(zipFile.toFile()))) {
             ZipEntry entry = zis.getNextEntry();
             if (entry != null) {
+                // Check if the file is in use
+                if (Files.exists(csvFile)) {
+                    try {
+                        Files.delete(csvFile);
+                    } catch (IOException e) {
+                        throw new IOException("The file is in use and cannot be overwritten: " + csvFile, e);
+                    }
+                }
                 Files.copy(zis, csvFile, StandardCopyOption.REPLACE_EXISTING);
             }
         }

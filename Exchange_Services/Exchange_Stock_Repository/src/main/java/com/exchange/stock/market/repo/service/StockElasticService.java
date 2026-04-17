@@ -1,16 +1,8 @@
 package com.exchange.stock.market.repo.service;
 
-import com.exchange.stock.market.repo.domain.StockDetails;
-import com.exchange.stock.market.repo.domain.StockDocument;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.stereotype.Service;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Service

@@ -1,0 +1,24 @@
+<configuration>
+
+    <!-- Splunk Appender -->
+    <appender name="SPLUNK" class="com.splunk.logging.HttpEventCollectorLogbackAppender">
+        <url>http://localhost:8088</url>
+        <token>980cd7a6-df34-4858-a2e7-fe5aba602b7a</token>
+        <sourcetype>springboot</sourcetype>
+        <sourcetype>log4j</sourcetype>
+        <index>main</index>
+    </appender>
+
+    <!-- Console Appender (optional but recommended) -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [traceId=%X{traceId}] [spanId=%X{spanId}] %-5level %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="SPLUNK"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
